@@ -9,6 +9,7 @@ ReactDOM.render(<Provider>
   <BrowserRouter>
     <Switch>
       <Route exact={true} key="/home" path="/home" component={Home} />
+      <Route exact={true} key="/home" path="/home" component={Home} />
     </Switch>
   </BrowserRouter>
 </Provider>, document.getElementById('root'));

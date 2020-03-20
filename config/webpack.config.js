@@ -42,6 +42,9 @@ const imageInlineSizeLimit = parseInt(
 // Check if TypeScript is setup
 const useTypeScript = fs.existsSync(paths.appTsConfig);
 
+// 路径 D:\www\11-microBlog\microBlog-react\config
+console.log('路径', path.resolve(__dirname, ''))
+
 // style files regexes
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
@@ -298,6 +301,11 @@ module.exports = function (webpackEnv) {
           'scheduler/tracing': 'scheduler/tracing-profiling',
         }),
         ...(modules.webpackAliases || {}),
+        'apis': path.resolve(__dirname, '../src/apis'),
+        'components': path.resolve(__dirname, '../src/components'),
+        'images': path.resolve(__dirname, '../src/images'),
+        'pages': path.resolve(__dirname, '../src/pages'),
+        'util': path.resolve(__dirname, '../src/util'),
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding

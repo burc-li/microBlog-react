@@ -4,9 +4,10 @@ import { Provider } from 'mobx-react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Car from 'pages/Car'
 import Home from 'pages/Home'
+import Store from 'pages/store'
 import 'antd/dist/antd.css'
 
-ReactDOM.render(<Provider>
+ReactDOM.render(<Provider {...Store}>
   <BrowserRouter>
     <Switch>
       <Route exact={true} key="/" path="/" component={Home} />

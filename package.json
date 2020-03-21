@@ -2,7 +2,6 @@
   "name": "myapp",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://127.0.0.1:3000",
   "dependencies": {
     "@svgr/webpack": "4.3.3",
     "@testing-library/jest-dom": "^4.2.4",
@@ -32,6 +31,7 @@
     "file-loader": "4.3.0",
     "fs-extra": "^8.1.0",
     "html-webpack-plugin": "4.0.0-beta.11",
+    "http-proxy-middleware": "^1.0.3",
     "identity-obj-proxy": "3.0.0",
     "jest": "24.9.0",
     "jest-environment-jsdom-fourteen": "1.0.1",

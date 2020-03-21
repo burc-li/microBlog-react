@@ -5,14 +5,19 @@ import './index.less'
 
 @inject(stores => {
   const { homeStore } = stores
-  const { homeValue } = homeStore
+  const { homeValue, changeHomeData } = homeStore
   return {
-    homeValue
+    homeValue,
+    changeHomeData,
   }
 })
 
 @observer
 class Home extends Component {
+
+  componentDidMount() {
+    this.props.changeHomeData()
+  }
   render() {
     return (
       <div className="Home">Home

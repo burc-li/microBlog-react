@@ -17,6 +17,13 @@ const pages = [
     component: Login,
     isLoginPage: true,
   },
+  {
+    name: '首页',
+    key: 'home',
+    path: '/',
+    component: Home,
+    isLoginPage: false,
+  },
 ]
 
 ReactDOM.render(<Provider {...Store}>

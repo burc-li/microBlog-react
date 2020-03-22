@@ -1,5 +1,5 @@
 import { observable, action } from "mobx";
-import { isExit, login } from "apis/account";
+import { isExit, login, logout } from "apis/account";
 import { message } from 'antd'
 
 class Store {
@@ -21,6 +21,13 @@ class Store {
     } catch{
       message.error('登录失败');
     }
+  }
+
+  @action.bound
+  async logout() {
+    const res = await logout()
+    if (res.data.success)
+      this.loginStatus = false
   }
 }
 export default new Store();

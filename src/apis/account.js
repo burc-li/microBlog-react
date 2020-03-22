@@ -15,3 +15,10 @@ export const isExit = userName => {
 export const login = account => {
   return axios.post(`/api/user/login`, account);
 };
+
+/**
+ * 退出
+ */
+export const logout = () => {
+  return axios.post(`/api/user/logout`);
+}

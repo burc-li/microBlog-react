@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { observer, inject } from 'mobx-react'
 import {
   UserOutlined,
   SettingFilled,
@@ -13,21 +14,34 @@ const IconStyle = {
   margin: '0 12px 0'
 }
 
-const menu = (
-  <Menu>
-    <Menu.Item key="0">
-      <a href="http://www.alipay.com/">1st menu item</a>
-    </Menu.Item>
-    <Menu.Item key="1">
-      <a href="http://www.taobao.com/">2nd menu item</a>
-    </Menu.Item>
-    <Menu.Divider />
-    <Menu.Item key="3">退出</Menu.Item>
-  </Menu>
-);
-
+@inject((store) => {
+  const { accountStore } = store
+  const { logout } = accountStore
+  return {
+    logout
+  }
+})
+@observer
 class AccountSeeting extends Component {
+
+  onClickOut = () => {
+    this.props.logout()
+  }
+
   render() {
+    const menu = (
+      <Menu>
+        <Menu.Item key="0">
+          <a href="http://www.alipay.com/">1st menu item</a>
+        </Menu.Item>
+        <Menu.Item key="1">
+          <a href="http://www.taobao.com/">2nd menu item</a>
+        </Menu.Item>
+        <Menu.Divider />
+        <Menu.Item key="3" onClick={this.onClickOut}>退出</Menu.Item>
+      </Menu>
+    );
+
     return (
       <div className="account-seeting">
         <UserOutlined style={IconStyle} />

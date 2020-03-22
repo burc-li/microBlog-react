@@ -6,11 +6,11 @@ import { observe } from "mobx";
 
 const { Item } = Form;
 const layout = {
-  labelCol: { span: 3 },
+  labelCol: { span: 5 },
   wrapperCol: { span: 8 }
 };
 const tailLayout = {
-  wrapperCol: { offset: 3, span: 8 }
+  wrapperCol: { offset: 5, span: 8 }
 };
 
 @inject(store => {
@@ -31,12 +31,6 @@ class LoginPane extends Component {
     }
   }
 
-  componentDidMount() {
-    const { userInfo,
-      login } = this.props
-    console.log("userInfo", userInfo)
-  }
-
   onChangeUsername = (e) => {
     this.setState({ userName: e.target.value })
   }
@@ -55,7 +49,8 @@ class LoginPane extends Component {
         <Item
           label="用户名"
           name="username"
-          rules={[{ message: "请输入用户名" }]}
+          rules={[{ required: true, message: "请输入用户名" }]}
+
         >
           <Input placeholder="请输入用户名" onChange={this.onChangeUsername} />
         </Item>
@@ -63,7 +58,7 @@ class LoginPane extends Component {
         <Item
           label="密码"
           name="password"
-          rules={[{ message: "请输入密码" }]}
+          rules={[{ required: true, message: "请输入密码" }]}
         >
           <Input.Password placeholder="请输入密码" onChange={this.onChangePassword} />
         </Item>

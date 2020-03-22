@@ -23,7 +23,7 @@ class Head extends Component {
           校园微博
         </h1>
         {
-          loginStatus ? <AccountSeeting /> : <AccountSeeting />
+          loginStatus ? <AccountSeeting /> : null
         }
       </div>
     )

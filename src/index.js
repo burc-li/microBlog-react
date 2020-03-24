@@ -15,14 +15,14 @@ const pages = [
     key: 'login',
     path: '/login',
     component: Login,
-    isLoginPage: true,
+    isOneRowPage: true,
   },
   {
     name: '首页',
     key: 'home',
-    path: '/',
+    path: '/:userId/home',
     component: Home,
-    isLoginPage: false,
+    isOneRowPage: false,
   },
 ]
 
@@ -37,7 +37,7 @@ ReactDOM.render(<Provider {...Store}>
               key={item.key}
               path={item.path}
               render={() => (
-                <Layout isLoginPage={item.isLoginPage}>
+                <Layout isOneRowPage={item.isOneRowPage}>
                   <item.component />
                 </Layout>
               )}

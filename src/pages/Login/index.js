@@ -10,7 +10,7 @@ class Login extends Component {
   render() {
     return (
       <div className="login-wraper">
-        <Tabs defaultActiveKey="2">
+        <Tabs defaultActiveKey="1">
           <TabPane tab="登录" key="1">
             <LoginPane />
           </TabPane>

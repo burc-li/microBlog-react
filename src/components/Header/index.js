@@ -1,21 +1,12 @@
 import React, { Component } from 'react'
-import { observer, inject } from 'mobx-react'
 import AccountSeeting from './AccountSeeting'
 import Logo from 'images/logo.png'
 import './index.less'
 
 
-@inject((store) => {
-  const { accountStore } = store
-  const { loginStatus } = accountStore
-  return {
-    loginStatus
-  }
-})
-@observer
 class Head extends Component {
   render() {
-    const { loginStatus } = this.props
+    const loginStatus = localStorage.getItem('loginStatus')
     return (
       <div className="layout-header">
         <h1>

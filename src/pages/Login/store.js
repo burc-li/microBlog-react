@@ -1,33 +1,56 @@
-import { observable, action } from "mobx";
-import { isExit, login, logout } from "apis/account";
+import { observable, action, toJS } from "mobx";
+import { isExit, register, login, logout } from "apis/account";
 import { message } from 'antd'
+import { MESSAGE_CONFIG } from 'util'
+
+message.config(MESSAGE_CONFIG);
 
 class Store {
-  @observable
-  userInfo = {};
-  @observable
-  loginStatus = false
 
+  // 登录
   @action.bound
   async login(account) {
     try {
       const res = await login(account);
       if (res.data.success) {
-        this.loginStatus = true
-        this.userInfo = res.data
-        return
+        // 持久化存储
+        localStorage.setItem('loginStatus', true)
+        localStorage.setItem('userInfo', JSON.stringify(res.data))
+        return res
       }
       message.error('用户名密码不正确');
+      return res
     } catch{
       message.error('登录失败');
     }
   }
 
+  // 退出
   @action.bound
   async logout() {
     const res = await logout()
     if (res.data.success)
-      this.loginStatus = false
+      localStorage.clear()
+
+    return res
+  }
+
+  // 注册时用户名是否存在
+  @action.bound
+  async isExit(userName) {
+    const res = await isExit(userName)
+    return res
+  }
+
+  @action.bound
+  async register({ email, userName, password, gender }) {
+    try {
+      const res = await register({ email, userName, password, gender })
+      if (res.data.success)
+        message.success('注册成功');
+    } catch{
+      message.error('注册失败');
+    }
   }
 }
 export default new Store();

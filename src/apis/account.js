@@ -8,6 +8,15 @@ import axios from "axios";
 export const isExit = userName => {
   return axios.post(`/api/user/isExist`, { userName })
 }
+
+/**
+ * 注册
+ * @param {object} registerInfo { email, username, password, sexValue }
+ */
+export const register = registerInfo => {
+  return axios.post(`/api/user/register`, registerInfo)
+}
+
 /**
  * 登录
  * @param {object} account {userName:'burc', password:'123456'}

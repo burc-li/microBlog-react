@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { observer, inject } from "mobx-react";
-import { toJS } from 'mobx'
-import { Form, Input, Button, message } from "antd";
-import { observe } from "mobx";
+import { withRouter } from 'react-router-dom'
+import { observer, inject } from "mobx-react"
+import { toJS } from 'mobx';
+import { Form, Input, Button } from "antd";
 
 const { Item } = Form;
 const layout = {
@@ -21,38 +21,38 @@ const tailLayout = {
     login
   };
 })
+
 @observer
 class LoginPane extends Component {
-  constructor() {
-    super()
-    this.state = {
-      userName: '',
-      password: ''
+
+  // 提交表单且数据验证成功后回调事件 (Button按钮类型要设置为submit；htmlType="submit")
+  onLogin = async (values) => {
+    const { userName, password } = values
+
+    const res = await this.props.login({ userName, password })
+
+    if (res.data.success) {
+      let userInfo = localStorage.getItem('userInfo')
+      userInfo = JSON.parse(userInfo)
+      this.props.history.push(`/${userInfo.data.id}/home`)
     }
   }
 
-  onChangeUsername = (e) => {
-    this.setState({ userName: e.target.value })
-  }
-  onChangePassword = (e) => {
-    this.setState({ password: e.target.value })
-  }
-
-  login = () => {
-    const { userName, password } = this.state
-    this.props.login({ userName, password })
-  }
 
   render() {
+
     return (
-      <Form {...layout} name="loginPane">
+      <Form
+        {...layout}
+        name="loginPane"
+        onFinish={this.onLogin}
+      >
         <Item
           label="用户名"
-          name="username"
+          name="userName"
           rules={[{ required: true, message: "请输入用户名" }]}
-
         >
-          <Input placeholder="请输入用户名" onChange={this.onChangeUsername} />
+          <Input placeholder="请输入用户名" />
         </Item>
 
         <Item
@@ -60,14 +60,13 @@ class LoginPane extends Component {
           name="password"
           rules={[{ required: true, message: "请输入密码" }]}
         >
-          <Input.Password placeholder="请输入密码" onChange={this.onChangePassword} />
+          <Input.Password placeholder="请输入密码" />
         </Item>
 
         <Item {...tailLayout}>
           <Button
             type="primary"
             htmlType="submit"
-            onClick={this.login}
           >
             登录
           </Button>
@@ -77,4 +76,4 @@ class LoginPane extends Component {
   }
 }
 
-export default LoginPane;
+export default withRouter(LoginPane);

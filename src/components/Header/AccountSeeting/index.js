@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
 import {
   UserOutlined,
@@ -24,8 +25,11 @@ const IconStyle = {
 @observer
 class AccountSeeting extends Component {
 
-  onClickOut = () => {
-    this.props.logout()
+  onClickOut = async () => {
+    const res = await this.props.logout()
+
+    if (res.data.success)
+      this.props.history.push('/login')
   }
 
   render() {
@@ -59,4 +63,4 @@ class AccountSeeting extends Component {
   }
 }
 
-export default AccountSeeting
+export default withRouter(AccountSeeting)

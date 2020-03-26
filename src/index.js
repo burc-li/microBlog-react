@@ -6,10 +6,22 @@ import Login from 'pages/Login'
 import Home from 'pages/Home'
 import Layout from 'pages/layout'
 import Store from 'pages/store'
+import { message } from 'antd';
 import 'antd/dist/antd.css'
 import './index.less'
+import { MESSAGE_CONFIG } from 'util'
+
+// message全局配置
+message.config(MESSAGE_CONFIG);
 
 const pages = [
+  {
+    name: '设置默认路由',
+    key: '/',
+    path: '/',
+    component: Login,
+    isOneRowPage: true,
+  },
   {
     name: '登录注册页面',
     key: 'login',

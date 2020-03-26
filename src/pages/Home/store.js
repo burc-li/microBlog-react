@@ -1,5 +1,5 @@
 import { observable, action } from 'mobx'
-import { getHomeData } from '../../apis/home'
+import { getHomeData } from '../../apis/blog'
 
 class Store {
   @observable

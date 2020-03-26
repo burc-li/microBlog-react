@@ -34,7 +34,7 @@ class LoginPane extends Component {
     if (res.data.success) {
       let userInfo = localStorage.getItem('userInfo')
       userInfo = JSON.parse(userInfo)
-      this.props.history.push(`/${userInfo.data.id}/home`)
+      this.props.history.push(`/${userInfo.id}/home`)
     }
   }
 

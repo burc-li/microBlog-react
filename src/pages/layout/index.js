@@ -9,7 +9,7 @@ class Layout extends Component {
     return (<>
       <Header></Header>
       <div className="layout-bottom">
-        <div className="left" style={{ width: isOneRowPage ? '0px' : '' }}>
+        <div className="left" style={{ display: isOneRowPage ? 'none' : 'block' }}>
           <Left></Left>
         </div>
         <div className="right">

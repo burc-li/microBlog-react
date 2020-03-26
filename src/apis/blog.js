@@ -1,0 +1,14 @@
+import axios from 'axios'
+import qs from 'qs'
+
+// 测试
+export const getHomeData = () => {
+  return axios.get(`/api/blog/profile/list/?userId=2&pageIndex=0`)
+}
+
+// 获取微博列表 获取个人主页微博列表
+export const getProfileBlogData = (userId, pageIndex) => {
+  let query = { userId, pageIndex }
+  query = qs.stringify(query)
+  return axios.get(`/api/blog/profile/list?${query}`)
+}

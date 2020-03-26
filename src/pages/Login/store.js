@@ -1,9 +1,6 @@
 import { observable, action, toJS } from "mobx";
 import { isExit, register, login, logout } from "apis/account";
 import { message } from 'antd'
-import { MESSAGE_CONFIG } from 'util'
-
-message.config(MESSAGE_CONFIG);
 
 class Store {
 
@@ -15,7 +12,7 @@ class Store {
       if (res.data.success) {
         // 持久化存储
         localStorage.setItem('loginStatus', true)
-        localStorage.setItem('userInfo', JSON.stringify(res.data))
+        localStorage.setItem('userInfo', JSON.stringify(res.data.data))
         return res
       }
       message.error('用户名密码不正确');
@@ -25,7 +22,7 @@ class Store {
     }
   }
 
-  // 退出
+  // 退出 清除持久化存储
   @action.bound
   async logout() {
     const res = await logout()
@@ -42,6 +39,7 @@ class Store {
     return res
   }
 
+  // 注册
   @action.bound
   async register({ email, userName, password, gender }) {
     try {

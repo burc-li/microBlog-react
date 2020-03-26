@@ -1,17 +1,19 @@
 import { observable, action } from 'mobx'
-import { getHomeData } from '../../apis/blog'
+import { createBolg } from 'apis/blog'
+import { message } from 'antd'
 
 class Store {
-  @observable
-  homeValue = '李百成'
 
   @action
-  async changeHomeData() {
-    // const homedata = await getHomeData()
-    getHomeData().then(res => {
-      // console.log("res", res)
-    })
-    // console.log("homedata", homedata)
+  async createBolg(content, image) {
+    try {
+      const res = await createBolg(content, image)
+      if (res.data.success) {
+        message.success('创建微博成功');
+      }
+    } catch{
+      message.error('创建微博失败');
+    }
   }
 }
 

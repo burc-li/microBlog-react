@@ -15,6 +15,8 @@ const IconStyle = {
   margin: '0 12px 0'
 }
 
+const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+
 @inject((store) => {
   const { accountStore } = store
   const { logout } = accountStore
@@ -50,7 +52,9 @@ class AccountSeeting extends Component {
       <div className="account-seeting">
         <UserOutlined style={IconStyle} />
 
-        <span className="userName">李百成</span>
+        <span className="userName">
+          {userInfo ? userInfo.userName : '未登录'}
+        </span>
 
         <SoundOutlined style={IconStyle} />
 

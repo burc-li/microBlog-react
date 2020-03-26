@@ -12,3 +12,8 @@ export const getProfileBlogData = (userId, pageIndex) => {
   query = qs.stringify(query)
   return axios.get(`/api/blog/profile/list?${query}`)
 }
+
+// 差创建微博
+export const createBolg = (content, image) => {
+  return axios.post(`/api/blog/create`, { content, image })
+}

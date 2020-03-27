@@ -11,9 +11,10 @@ const layout = {
 };
 
 @inject(() => {
-  const { createBolg } = store
+  const { createBolg, getAllBolg } = store
   return {
-    createBolg
+    createBolg,
+    getAllBolg
   }
 })
 @observer
@@ -84,6 +85,7 @@ class WirteBlog extends Component {
     const content = values.content
     const image = this.state.previewImage
     this.props.createBolg(content, image)
+    this.props.getAllBolg(0)
 
     // 清空文本框内容 
     this.formRef.current.resetFields()

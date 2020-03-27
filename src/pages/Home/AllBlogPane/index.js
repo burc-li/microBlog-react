@@ -38,7 +38,11 @@ class AllBlogPane extends Component {
     return (
       <div className="all-blog-pane">
         {
-          blogList.map(item => <BlogItem key={item.id} blogData={item} />)
+          blogList.map(item => <BlogItem
+            key={item.id}
+            type="allBlog"
+            currentPage={Number(pageIndex) + 1}
+            blogData={item} />)
         }
         <Pagination {...PaginationOption} />
       </div>

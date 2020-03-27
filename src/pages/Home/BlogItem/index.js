@@ -10,10 +10,12 @@ import './index.less'
 const userInfo = JSON.parse(localStorage.getItem('userInfo'))
 
 @inject(() => {
-  const { likeBlog, complainBlog } = store
+  const { likeBlog, complainBlog, deleteBlog, getAllBolg } = store
   return {
     likeBlog,
-    complainBlog
+    complainBlog,
+    deleteBlog,
+    getAllBolg
   }
 })
 @observer
@@ -25,11 +27,22 @@ class BlogItem extends Component {
   complain = blogId => {
     this.props.complainBlog(userInfo.id, blogId)
   }
+  delete = blogId => {
+    const { type, currentPage } = this.props
+    this.props.deleteBlog(blogId)
+    if (type === "allBlog") {
+      this.props.getAllBolg(currentPage - 1)
+    } else {
+
+    }
+  }
 
   render() {
-    const { blogData } = this.props
+    const { blogData, type, currentPage } = this.props
     const { user } = blogData
-
+    // console.log("userInfo.id", userInfo.id)
+    // console.log("blogData", blogData)
+    // console.log("currentPage", currentPage)
     return (
       <div className="blog-wrap">
         <div className="blog-header">
@@ -49,9 +62,9 @@ class BlogItem extends Component {
               <Menu.Item onClick={() => { this.complain(blogData.id) }}>
                 举报
             </Menu.Item>
-              <Menu.Item>
-                删除
-            </Menu.Item>
+              <Menu.Item onClick={() => { this.delete(blogData.id) }}>
+                {userInfo.id === 0 || userInfo.id === blogData.userId ? `删除` : ''}
+              </Menu.Item>
             </Menu>}
             trigger={['click']}
           >

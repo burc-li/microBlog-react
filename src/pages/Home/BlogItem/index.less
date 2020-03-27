@@ -1,7 +1,9 @@
 .blog-wrap {
   // border: 1px solid #f00;
+  box-shadow: 0 0 4px #ccc;
   background: #fff;
   padding: 4px 8px;
+  margin-bottom: 16px;
   .blog-header {
     // border: 1px solid #f00;
     overflow: hidden;
@@ -10,7 +12,6 @@
       width: 42px;
       height: 42px;
     }
-
     .blog-title {
       float: left;
       margin-left: 8px;
@@ -28,9 +29,10 @@
   }
   .blog-content {
     // border: 1px solid #f00;
+    margin-top: 12px;
     p {
       word-break: break-all;
-      // border: 1px solid #f00;
+      color: #444;
       margin-left: 50px;
     }
     img {
@@ -54,6 +56,10 @@
     }
     .footer-operate span {
       margin-left: 8px;
+    }
+    .footer-operate:hover {
+      color: #de5e60;
+      cursor: pointer;
     }
   }
 }

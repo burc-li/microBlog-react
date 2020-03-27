@@ -36,8 +36,9 @@ export default function UserItem(props) {
 
   return (
     <div className="user-item">
-      <img src={`${DOMAIN}${userItem.picture}`} alt='' />
-
+      <Link to={`/${userItem.id}/profile`} >
+        <img src={`${DOMAIN}${userItem.picture}`} alt='' />
+      </Link>
       <div className="item-info">
         <Link to={`/${userItem.id}/profile`} >
           <h2>
@@ -63,6 +64,6 @@ export default function UserItem(props) {
             followerId={userItem.id}
           />
       }
-    </div>
+    </div >
   )
 }

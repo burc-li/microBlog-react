@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { DOMAIN } from 'util'
 import './index.less'
 
@@ -8,8 +9,10 @@ export default function UserInfo(props) {
 
   return (
     <div className="user-info">
-      <img src={`${DOMAIN}${userInfo.picture}`} alt='' />
-      <p>{userInfo ? userInfo.userName : '未登录'}</p>
+      <Link to={`/${userInfo.id}/profile`}>
+        <img src={`${DOMAIN}${userInfo.picture}`} alt='' />
+        <p>{userInfo ? userInfo.userName : '未登录'}</p>
+      </Link>
       <div className="info-count">
         <div className="count">
           <h2>关注人</h2>

@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react'
 import { Tabs } from 'antd';
 import { toJS } from 'mobx'
 import WirteBlog from './WirteBlog'
-import BlogItem from './BlogItem'
+import AllBlogPane from './AllBlogPane'
 import './index.less'
 
 const { TabPane } = Tabs;
@@ -29,7 +29,7 @@ class Home extends Component {
         <WirteBlog />
         <Tabs defaultActiveKey="1" >
           <TabPane tab="全部" key="1">
-            <BlogItem />
+            <AllBlogPane />
           </TabPane>
           <TabPane tab="关注" key="2">
             关注

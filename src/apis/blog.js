@@ -13,7 +13,11 @@ export const getProfileBlogData = (userId, pageIndex) => {
   return axios.get(`/api/blog/profile/list?${query}`)
 }
 
-// 差创建微博
+// 创建建微博
 export const createBolg = (content, image) => {
   return axios.post(`/api/blog/create`, { content, image })
+}
+// 获取全部用户的微博列表
+export const getAllBolgData = pageIndex => {
+  return axios.get(`/api/blog/profile/list/?pageIndex=${pageIndex}`)
 }

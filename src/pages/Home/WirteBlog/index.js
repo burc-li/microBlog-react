@@ -135,7 +135,7 @@ class WirteBlog extends Component {
           <Form.Item
             name="content"
             className="item-content"
-            rules={[{ max: 2, message: "不能超过144个字" }]}
+            rules={[{ max: 144, message: "不能超过144个字" }]}
           >
             <Input.TextArea className="text-area" />
           </Form.Item>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { DOMAIN } from 'util'
 import './index.less'
 
 export default function UserInfo(props) {
@@ -7,7 +8,7 @@ export default function UserInfo(props) {
 
   return (
     <div className="user-info">
-      <img src='https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1585111316900&di=5c82805955e4ff866595c2e1da559f16&imgtype=0&src=http%3A%2F%2Fimage.biaobaiju.com%2Fuploads%2F20180919%2F20%2F1537361717-kVlwUMceKA.png' alt='' />
+      <img src={`${DOMAIN}${userInfo.picture}`} alt='' />
       <p>{userInfo ? userInfo.userName : '未登录'}</p>
       <div className="info-count">
         <div className="count">

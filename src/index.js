@@ -9,6 +9,7 @@ import Store from 'pages/store'
 import { message } from 'antd';
 import 'antd/dist/antd.css'
 import './index.less'
+import 'util/iconfont.less'
 import { MESSAGE_CONFIG } from 'util'
 
 // message全局配置

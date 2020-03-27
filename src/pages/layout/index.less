@@ -1,15 +1,19 @@
 @import "../../util/variables.less";
 
 .layout-bottom {
-  max-height: calc(100vh - @nav-header-height);
-  overflow: auto;
+  min-height: calc(100vh - @nav-header-height);
+  box-shadow: 0px 0px 25px #222;
   display: flex;
+  overflow: hidden;
   .left {
-    width: @layout-left-width;
-    height: 100%;
+    width: 30%;
+    // height: 100%;
   }
   .right {
     flex-grow: 1;
+    padding: 0 32px;
     background: #f1f3f4;
+    padding-bottom: 5000px;
+    margin-bottom: -5000px;
   }
 }

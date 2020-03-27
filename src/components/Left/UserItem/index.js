@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { DOMAIN } from 'util'
 import { Button } from 'antd'
 import './index.less'
 
@@ -35,15 +36,17 @@ export default function UserItem(props) {
 
   return (
     <div className="user-item">
-      <img src={userItem.picture} alt='' />
-      <Link to={`/${userItem.id}/profile`} >
-        <div className="item-info">
+      <img src={`${DOMAIN}${userItem.picture}`} alt='' />
+
+      <div className="item-info">
+        <Link to={`/${userItem.id}/profile`} >
           <h2>
             {userItem.userName}
           </h2>
           <p>{userItem.briefIntroduce}</p>
-        </div>
-      </Link>
+        </Link>
+      </div>
+
 
       {
         type === 'fans' ?

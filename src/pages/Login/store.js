@@ -11,6 +11,7 @@ class Store {
       const res = await login(account);
       if (res.data.success) {
         // 持久化存储
+        console.log("res.data.data", res.data.data)
         localStorage.setItem('loginStatus', true)
         localStorage.setItem('userInfo', JSON.stringify(res.data.data))
         return res

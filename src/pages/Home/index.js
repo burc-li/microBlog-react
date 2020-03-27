@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import { Tabs } from 'antd';
 import { toJS } from 'mobx'
 import WirteBlog from './WirteBlog'
+import BlogItem from './BlogItem'
 import './index.less'
+
+const { TabPane } = Tabs;
 
 @inject(stores => {
   const { homeStore } = stores
@@ -23,7 +27,14 @@ class Home extends Component {
     return (
       <div className="Home">
         <WirteBlog />
-        <div>博客</div>
+        <Tabs defaultActiveKey="1" >
+          <TabPane tab="全部" key="1">
+            <BlogItem />
+          </TabPane>
+          <TabPane tab="关注" key="2">
+            关注
+          </TabPane>
+        </Tabs>
       </div>
     )
   }

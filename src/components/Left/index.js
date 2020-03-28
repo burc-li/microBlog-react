@@ -53,7 +53,8 @@ class Left extends Component {
     const userId = this.props.match.params.userId
     const followersList = followersData.followersList ? followersData.followersList : []
     const fansList = fansData.fansList ? fansData.fansList : []
-
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    // console.log("userInfo", userInfo)
     return (
       <div className="left-sider">
         <UserInfo

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
 import {
   UserOutlined,
@@ -49,6 +49,11 @@ class AccountSeeting extends Component {
 
     return (
       <div className="account-seeting">
+
+        <Link to={`/${userInfo.id}/home`}>
+          <span>首页</span>
+        </Link>
+
         <UserOutlined style={IconStyle} />
 
         <span className="userName">

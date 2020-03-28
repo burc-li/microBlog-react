@@ -5,6 +5,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Login from 'pages/Login'
 import Home from 'pages/Home'
 import Layout from 'pages/layout'
+import Detail from 'pages/Detail'
 import Store from 'pages/store'
 import { message } from 'antd';
 import 'antd/dist/antd.css'
@@ -35,6 +36,13 @@ const pages = [
     key: 'home',
     path: '/:userId/home',
     component: Home,
+    isLoginPage: false,
+  },
+  {
+    name: '微博详情页',
+    key: 'detail',
+    path: '/:blogId/detail',
+    component: Detail,
     isLoginPage: false,
   },
 ]

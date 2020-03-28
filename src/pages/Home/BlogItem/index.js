@@ -7,8 +7,6 @@ import store from '../store'
 import { Menu, Dropdown } from 'antd';
 import './index.less'
 
-const userInfo = JSON.parse(localStorage.getItem('userInfo'))
-
 @inject(() => {
   const { likeBlog, complainBlog, deleteBlog, getAllBolg, getFollowerBolgData } = store
   return {
@@ -25,6 +23,7 @@ class BlogItem extends Component {
   // 点赞博客
   like = blogId => {
     const { currentPage } = this.props
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
     const userId = this.props.match.params.userId
     this.props.likeBlog(userInfo.id, blogId)
     this.props.getFollowerBolgData(userId, currentPage - 1)
@@ -32,6 +31,7 @@ class BlogItem extends Component {
   }
   // 举报博客
   complain = blogId => {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
     this.props.complainBlog(userInfo.id, blogId)
   }
   // 删除博客
@@ -46,6 +46,7 @@ class BlogItem extends Component {
   }
 
   render() {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
     const { blogData, currentPage } = this.props
     const { user } = blogData
     // console.log("userInfo.id", userInfo.id)

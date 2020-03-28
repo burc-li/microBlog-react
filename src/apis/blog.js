@@ -25,3 +25,7 @@ export const getAllBolgData = pageIndex => {
 export const getFollowerBolgData = (userId, pageIndex) => {
   return axios.get(`/api/blog/follow/list?userId=${userId}&pageIndex=${pageIndex}`)
 }
+// 通过博客id获取博客详情信息
+export const getBlogDetail = blogId => {
+  return axios.get(`/api/blog/detail?blogId=${blogId}`)
+}

@@ -12,6 +12,25 @@ const layout = {
   wrapperCol: { span: 22 },
 };
 
+function CommentItem({ item }) {
+  return (
+    <div className="comment-item">
+      <div className="comment-header">
+        <Link to={`/${item.user.id}/profile`}>
+          <img src={`${DOMAIN}${item.user.picture}`} alt='' />
+        </Link>
+        <div className="comment-title">
+          <h2>{item.user.userName}</h2>
+          <p>{moment(item.createdAt).format('YYYY年MM月DD日 HH:mm:ss')}</p>
+        </div>
+      </div>
+      <div className="comment-content">
+        {item.content}
+      </div>
+    </div>
+  )
+}
+
 @inject(() => {
   const { detail, getBlogDetail, likeBlog, addComment } = store
   return {
@@ -23,7 +42,7 @@ const layout = {
 })
 @observer
 class Detail extends Component {
-
+  formRef = React.createRef();
   state = {
     toUser: ''
   }
@@ -43,15 +62,18 @@ class Detail extends Component {
     const blogId = this.props.match.params.blogId
     const userInfo = JSON.parse(localStorage.getItem('userInfo'))
     this.props.addComment(userInfo.id, blogId, values.comment)
+    this.formRef.current.resetFields()
   }
 
   render() {
     const { detail } = this.props
-    console.log("Detail", detail)
+    // console.log("Detail", detail)
     return (
       <div className="detail">
         <div className="detail-header">
-          <img src={detail.user ? `${DOMAIN}${detail.user.picture}` : ``} alt='' />
+          <Link to={`/${detail.userId}/profile`}>
+            <img src={detail.user ? `${DOMAIN}${detail.user.picture}` : ``} alt='' />
+          </Link>
           <div className="header-title">
             <h2>{detail.user ? detail.user.userName : ''}</h2>
             <p>{moment(detail.createdAt).format('YYYY年MM月DD日 HH:mm:ss')}</p>
@@ -75,7 +97,8 @@ class Detail extends Component {
             <Form
               {...layout}
               name="basic"
-              initialValues={{ "comment": "441" }}
+              ref={this.formRef}
+              initialValues={{ "comment": "" }}
               onFinish={this.onFinsh}
             >
               <Form.Item
@@ -91,6 +114,13 @@ class Detail extends Component {
                 </Button>
               </Form.Item>
             </Form>
+          </div>
+          <div className="comment-list">
+            {
+              detail.comment ? detail.comment.map(item =>
+                <CommentItem item={item} key={item.id} />
+              ) : null
+            }
           </div>
         </div>
       </div >

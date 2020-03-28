@@ -1,8 +1,8 @@
 .detail {
-  border: 1px solid #f00;
+  // border: 1px solid #f00;
   background-color: #fff;
   margin-top: 30px;
-  padding: 8px 8px;
+  padding: 22px 22px;
   .detail-header {
     overflow: hidden;
     img {
@@ -60,7 +60,7 @@
     }
   }
   .detail-footer .comment {
-    border: 1px solid #f00;
+    // border: 1px solid #f00;
     border-top: 1px solid #ccc;
     padding-top: 15px;
     margin-top: 16px;
@@ -70,6 +70,40 @@
     }
     .ant-form-item {
       margin-bottom: 8px;
+    }
+  }
+  .detail-footer .comment-list {
+    margin-top: 12px;
+
+    .comment-item {
+      // border: 1px solid #f00;
+      padding: 8px;
+      overflow: hidden;
+    }
+    .comment-item img {
+      float: left;
+      width: 36px;
+      height: 36px;
+    }
+    .comment-item .comment-header {
+      overflow: hidden;
+    }
+    .comment-item .comment-title {
+      // border: 1px solid #f00;
+      float: left;
+      padding-left: 16px;
+      height: 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      p {
+        font-size: 14px;
+      }
+    }
+    .comment-item .comment-content {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+      margin: 12px auto 0px 54px;
     }
   }
 }

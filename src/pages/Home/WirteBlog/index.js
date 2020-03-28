@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import { observer, inject } from "mobx-react"
 import { Form, Input, Button, Upload, message, Modal } from 'antd';
 import store from '../store'
@@ -11,10 +12,11 @@ const layout = {
 };
 
 @inject(() => {
-  const { createBolg, getAllBolg } = store
+  const { createBolg, getAllBolg, getFollowerBolgData } = store
   return {
     createBolg,
-    getAllBolg
+    getAllBolg,
+    getFollowerBolgData
   }
 })
 @observer
@@ -82,10 +84,12 @@ class WirteBlog extends Component {
 
   // 提交表单且数据验证成功后回调事件
   onFinsh = values => {
+    const userId = this.props.match.params.userId
     const content = values.content
     const image = this.state.previewImage
     this.props.createBolg(content, image)
     this.props.getAllBolg(0)
+    this.props.getFollowerBolgData(userId, 0)
 
     // 清空文本框内容 
     this.formRef.current.resetFields()
@@ -168,4 +172,4 @@ class WirteBlog extends Component {
   }
 }
 
-export default WirteBlog
+export default withRouter(WirteBlog)

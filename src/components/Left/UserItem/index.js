@@ -30,40 +30,47 @@ function UnfollowBtn(props) {
 </Button>
 }
 
+
 export default function UserItem(props) {
 
   const { type, userId, userItem } = props
-
-  return (
-    <div className="user-item">
-      <Link to={`/${userItem.id}/profile`} >
-        <img src={`${DOMAIN}${userItem.picture}`} alt='' />
-      </Link>
-      <div className="item-info">
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+  if (userInfo) {
+    return (
+      <div className="user-item">
         <Link to={`/${userItem.id}/profile`} >
-          <h2>
-            {userItem.userName}
-          </h2>
-          <p>{userItem.briefIntroduce}</p>
+          <img src={`${DOMAIN}${userItem.picture}`} alt='' />
         </Link>
-      </div>
+        <div className="item-info">
+          <Link to={`/${userItem.id}/profile`} >
+            <h2>
+              {userItem.userName}
+            </h2>
+            <p>{userItem.briefIntroduce}</p>
+          </Link>
+        </div>
 
 
-      {
-        type === 'fans' ?
-          props.isFollower ?
-            <DisabledBtn /> :
-            <FollowBtn
-              onClickFollow={props.onClickFollow}
+        {
+          type === 'fans' ?
+            props.isFollower ?
+              <DisabledBtn /> :
+              <FollowBtn
+                onClickFollow={props.onClickFollow}
+                userId={userId}
+                followerId={userItem.id}
+              /> :
+            <UnfollowBtn
+              onClickUnfollow={props.onClickUnfollow}
               userId={userId}
               followerId={userItem.id}
-            /> :
-          <UnfollowBtn
-            onClickUnfollow={props.onClickUnfollow}
-            userId={userId}
-            followerId={userItem.id}
-          />
-      }
-    </div >
-  )
+            />
+        }
+      </div >
+    )
+  } else {
+    return null
+  }
+
+
 }

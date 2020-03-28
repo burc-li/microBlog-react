@@ -1,11 +1,18 @@
 import { observable, action } from 'mobx'
-import { createBolg, getAllBolgData } from 'apis/blog'
+import { createBolg, getAllBolgData, getFollowerBolgData } from 'apis/blog'
 import { likeBlog, complainBlog, deleteBlog } from 'apis/message'
 import { message } from 'antd'
 
 class Store {
   @observable
   allBlogData = {
+    blogList: [],
+    pageSize: 0,
+    pageIndex: 0,
+    count: 0,
+  }
+  @observable
+  followerBlogData = {
     blogList: [],
     pageSize: 0,
     pageIndex: 0,
@@ -33,6 +40,18 @@ class Store {
       }
     } catch{
       message.error('获取全部用户微博列表失败');
+    }
+  }
+
+  @action.bound
+  async getFollowerBolgData(userId, pageIndex) {
+    try {
+      const res = await getFollowerBolgData(userId, pageIndex)
+      if (res.data.success) {
+        this.followerBlogData = res.data.data
+      }
+    } catch{
+      message.error('获取关注用户微博列表失败');
     }
   }
 

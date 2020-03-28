@@ -21,21 +21,21 @@ const pages = [
     key: '/',
     path: '/',
     component: Login,
-    isOneRowPage: true,
+    isLoginPage: true,
   },
   {
     name: '登录注册页面',
     key: 'login',
     path: '/login',
     component: Login,
-    isOneRowPage: true,
+    isLoginPage: true,
   },
   {
     name: '首页',
     key: 'home',
     path: '/:userId/home',
     component: Home,
-    isOneRowPage: false,
+    isLoginPage: false,
   },
 ]
 
@@ -50,7 +50,7 @@ ReactDOM.render(<Provider {...Store}>
               key={item.key}
               path={item.path}
               render={() => (
-                <Layout isOneRowPage={item.isOneRowPage}>
+                <Layout isLoginPage={item.isLoginPage}>
                   <item.component />
                 </Layout>
               )}

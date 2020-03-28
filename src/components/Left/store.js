@@ -10,9 +10,9 @@ import { message } from 'antd';
 
 class Store {
   @observable
-  fansData = {}
+  fansData = { count: 0 }
   @observable
-  followersData = {}
+  followersData = { count: 0 }
   @observable
   profileBlogCount = 0
 
@@ -74,7 +74,7 @@ class Store {
    */
   @action.bound
   async unFollow(userId, followerId) {
-    console.log(userId, followerId)
+    // console.log(userId, followerId)
     try {
       const res = await unFollow(followerId)
       console.log("res", res)

@@ -15,8 +15,6 @@ const IconStyle = {
   margin: '0 12px 0'
 }
 
-const userInfo = JSON.parse(localStorage.getItem('userInfo'))
-
 @inject((store) => {
   const { accountStore } = store
   const { logout } = accountStore
@@ -35,6 +33,7 @@ class AccountSeeting extends Component {
   }
 
   render() {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
     const menu = (
       <Menu>
         <Menu.Item key="0">

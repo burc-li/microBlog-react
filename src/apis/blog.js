@@ -21,3 +21,7 @@ export const createBolg = (content, image) => {
 export const getAllBolgData = pageIndex => {
   return axios.get(`/api/blog/profile/list/?pageIndex=${pageIndex}`)
 }
+// 获取关注用户的微博列表
+export const getFollowerBolgData = (userId, pageIndex) => {
+  return axios.get(`/api/blog/follow/list?userId=${userId}&pageIndex=${pageIndex}`)
+}

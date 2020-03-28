@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { observer, inject } from 'mobx-react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import moment from 'moment';
 import { DOMAIN } from 'util'
 import store from '../store'
@@ -10,12 +10,13 @@ import './index.less'
 const userInfo = JSON.parse(localStorage.getItem('userInfo'))
 
 @inject(() => {
-  const { likeBlog, complainBlog, deleteBlog, getAllBolg } = store
+  const { likeBlog, complainBlog, deleteBlog, getAllBolg, getFollowerBolgData } = store
   return {
     likeBlog,
     complainBlog,
     deleteBlog,
-    getAllBolg
+    getAllBolg,
+    getFollowerBolgData
   }
 })
 @observer
@@ -28,17 +29,17 @@ class BlogItem extends Component {
     this.props.complainBlog(userInfo.id, blogId)
   }
   delete = blogId => {
-    const { type, currentPage } = this.props
+    const { currentPage } = this.props
     this.props.deleteBlog(blogId)
-    if (type === "allBlog") {
-      this.props.getAllBolg(currentPage - 1)
-    } else {
 
-    }
+    const userId = this.props.match.params.userId
+    this.props.getFollowerBolgData(userId, currentPage - 1)
+    this.props.getAllBolg(currentPage - 1)
+
   }
 
   render() {
-    const { blogData, type, currentPage } = this.props
+    const { blogData, currentPage } = this.props
     const { user } = blogData
     // console.log("userInfo.id", userInfo.id)
     // console.log("blogData", blogData)
@@ -63,7 +64,7 @@ class BlogItem extends Component {
                 举报
             </Menu.Item>
               <Menu.Item onClick={() => { this.delete(blogData.id) }}>
-                {userInfo.id === 0 || userInfo.id === blogData.userId ? `删除` : ''}
+                {userInfo ? userInfo.id === 0 || userInfo.id === blogData.userId ? `删除` : '' : ''}
               </Menu.Item>
             </Menu>}
             trigger={['click']}
@@ -103,4 +104,4 @@ class BlogItem extends Component {
   }
 }
 
-export default BlogItem
+export default withRouter(BlogItem)

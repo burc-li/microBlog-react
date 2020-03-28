@@ -6,13 +6,13 @@ import './index.less'
 
 class Layout extends Component {
   render() {
-    const { isOneRowPage } = this.props
+    const { isLoginPage } = this.props
     return (<>
       <Header></Header>
       <Row>
         <Col lg={{ offset: 2, span: 20 }} xl={{ offset: 3, span: 18 }} xxl={{ offset: 4, span: 16 }}>
           <div className="layout-bottom">
-            <div className="left" style={{ display: isOneRowPage ? 'none' : 'block' }}>
+            <div className="left">
               <Left></Left>
             </div>
             <div className="right">

@@ -4,6 +4,7 @@ import { Tabs } from 'antd';
 import { toJS } from 'mobx'
 import WirteBlog from './WirteBlog'
 import AllBlogPane from './AllBlogPane'
+import FollowerBlogPane from './FollowerBlogPane'
 import './index.less'
 
 const { TabPane } = Tabs;
@@ -32,7 +33,7 @@ class Home extends Component {
             <AllBlogPane />
           </TabPane>
           <TabPane tab="关注" key="2">
-            关注
+            <FollowerBlogPane />
           </TabPane>
         </Tabs>
       </div>

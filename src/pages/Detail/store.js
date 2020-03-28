@@ -27,6 +27,7 @@ class Store {
       const res = await likeBlog(userId, blogId)
       this.getBlogDetail(blogId)
       if (res.data.success) {
+
         console.log("点赞")
       }
     } catch{

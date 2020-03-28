@@ -36,7 +36,10 @@ const { Panel } = Collapse;
 @observer
 class Left extends Component {
   componentDidMount() {
-    const userId = this.props.match.params.userId
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    // const userId = this.props.match.params.userId
+    const userId = userInfo ? userInfo.id : 0
+    // console.log("userInfo", userInfo)
     this.props.getFans(userId)
     this.props.getFollowers(userId)
     this.props.getProfileBlog(userId, 0)
@@ -50,10 +53,11 @@ class Left extends Component {
       follow,
       unFollow
     } = this.props
-    const userId = this.props.match.params.userId
+    // const userId = this.props.match.params.userId
     const followersList = followersData.followersList ? followersData.followersList : []
     const fansList = fansData.fansList ? fansData.fansList : []
     const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    const userId = userInfo ? userInfo.id : 0
     // console.log("userInfo", userInfo)
     return (
       <div className="left-sider">
@@ -63,7 +67,7 @@ class Left extends Component {
           profileBlogCount={profileBlogCount}
         />
         <Collapse defaultActiveKey={['1', '2']}>
-          < Panel header="关注人列表" key="1" >
+          <Panel header="关注人列表" key="1" >
             {
               followersList ?
                 followersList.map(item =>

@@ -1,29 +1,46 @@
 import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
+import { toJS } from 'mobx'
 import {
   UserOutlined,
   SettingFilled,
   SoundOutlined,
 } from '@ant-design/icons';
-import { Menu, Dropdown } from 'antd';
+import { Menu, Dropdown, Badge } from 'antd';
 import './index.less'
 
 const IconStyle = {
+  cursor: 'pointer',
   color: '#fff',
   fontSize: '22px',
   margin: '0 12px 0'
 }
+const SeetingIconStyle = {
+  cursor: 'pointer',
+  color: '#fff',
+  fontSize: '22px',
+  marginLeft: '18px'
+}
 
 @inject((store) => {
   const { accountStore } = store
+  const { noticeStore } = store
   const { logout } = accountStore
+  const { noticeMess, getNoticeData } = noticeStore
   return {
-    logout
+    logout,
+    noticeMess: toJS(noticeMess),
+    getNoticeData
   }
 })
 @observer
 class AccountSeeting extends Component {
+
+  componentDidMount() {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    this.props.getNoticeData(userInfo.id)
+  }
 
   onClickOut = async () => {
     const res = await this.props.logout()
@@ -34,6 +51,7 @@ class AccountSeeting extends Component {
 
   render() {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    const { noticeMess } = this.props
     const menu = (
       <Menu>
         <Menu.Item key="0">
@@ -60,10 +78,16 @@ class AccountSeeting extends Component {
           {userInfo ? userInfo.userName : '未登录'}
         </span>
 
-        <SoundOutlined style={IconStyle} />
+
+        <Badge count={noticeMess.count}>
+          <Link to={`/${userInfo.id}/notice`}>
+            <SoundOutlined style={IconStyle} />
+          </Link>
+        </Badge>
+
 
         <Dropdown overlay={menu}>
-          <SettingFilled style={IconStyle} />
+          <SettingFilled style={SeetingIconStyle} />
         </Dropdown>
 
       </div>

@@ -31,13 +31,16 @@ function CommentItem({ item }) {
   )
 }
 
-@inject(() => {
+@inject((stores) => {
+  const { noticeStore } = stores
   const { detail, getBlogDetail, likeBlog, addComment } = store
+  const { getNoticeData } = noticeStore
   return {
     detail: toJS(detail),
     getBlogDetail,
     likeBlog,
-    addComment
+    addComment,
+    getNoticeData
   }
 })
 @observer

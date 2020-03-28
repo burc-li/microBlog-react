@@ -87,9 +87,7 @@ class WirteBlog extends Component {
     const userId = this.props.match.params.userId
     const content = values.content
     const image = this.state.previewImage
-    this.props.createBolg(content, image)
-    this.props.getAllBolg(0)
-    this.props.getFollowerBolgData(userId, 0)
+    this.props.createBolg(content, image, userId)
 
     // 清空文本框内容 
     this.formRef.current.resetFields()

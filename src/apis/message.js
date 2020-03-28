@@ -17,3 +17,11 @@ export const deleteBlog = (blogId) => {
 export const addComment = (userId, blogId, content) => {
   return axios.post(`/api/message/comment`, { userId, blogId, content })
 }
+// 获取消息通知
+export const getNoticeData = userId => {
+  return axios.get(`/api/message/notice?userId=${userId}`)
+}
+// 获取消息通知
+export const readNotice = userId => {
+  return axios.post(`/api/message/read`, { userId })
+}

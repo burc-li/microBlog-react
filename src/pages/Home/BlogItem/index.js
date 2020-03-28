@@ -37,12 +37,8 @@ class BlogItem extends Component {
   // 删除博客
   delete = blogId => {
     const { currentPage } = this.props
-    this.props.deleteBlog(blogId)
-
     const userId = this.props.match.params.userId
-    this.props.getFollowerBolgData(userId, currentPage - 1)
-    this.props.getAllBolg(currentPage - 1)
-
+    this.props.deleteBlog(blogId, userId)
   }
 
   render() {

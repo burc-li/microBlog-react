@@ -20,10 +20,12 @@ class Store {
   }
 
   @action
-  async createBolg(content, image) {
+  async createBolg(content, image, userId) {
     try {
       const res = await createBolg(content, image)
       if (res.data.success) {
+        this.getAllBolg(0)
+        this.getFollowerBolgData(userId, 0)
         message.success('创建微博成功');
       }
     } catch{
@@ -79,17 +81,18 @@ class Store {
     }
   }
   @action.bound
-  async deleteBlog(blogId) {
+  async deleteBlog(blogId, userId) {
     try {
       const res = await deleteBlog(blogId)
       if (res.data.success) {
+        this.getAllBolg(0)
+        this.getFollowerBolgData(userId, 0)
         message.success('删除成功')
       }
     } catch{
       message.error('删除失败');
     }
   }
-
 
 }
 

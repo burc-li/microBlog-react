@@ -61,6 +61,7 @@ class Store {
     try {
       const res = await likeBlog(userId, blogId)
       if (res.data.success) {
+        // message.success('点赞成功')
       }
     } catch{
       message.error('点赞失败');

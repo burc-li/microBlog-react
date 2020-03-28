@@ -22,12 +22,19 @@ const userInfo = JSON.parse(localStorage.getItem('userInfo'))
 @observer
 class BlogItem extends Component {
 
+  // 点赞博客
   like = blogId => {
+    const { currentPage } = this.props
+    const userId = this.props.match.params.userId
     this.props.likeBlog(userInfo.id, blogId)
+    this.props.getFollowerBolgData(userId, currentPage - 1)
+    this.props.getAllBolg(currentPage - 1)
   }
+  // 举报博客
   complain = blogId => {
     this.props.complainBlog(userInfo.id, blogId)
   }
+  // 删除博客
   delete = blogId => {
     const { currentPage } = this.props
     this.props.deleteBlog(blogId)
@@ -92,11 +99,11 @@ class BlogItem extends Component {
             <i className="iconfont">
               &#xe60d;
               </i>
-            <span>3</span>
+            <span>{blogData.likeCount}</span>
           </div>
           <div className="footer-operate">
             <i className="iconfont">&#xe64b;</i>
-            <span>5</span>
+            <span>{blogData.commentCount}</span>
           </div>
         </div>
       </div>

@@ -31,7 +31,7 @@ class Notice extends Component {
 
   render() {
     const { noticeMess, readedNoticeMess } = this.props
-    console.log("readedNoticeMess", readedNoticeMess)
+    // console.log("readedNoticeMess", readedNoticeMess)
     return (
       <div className="notice-wrap">
         <p>新消息</p>

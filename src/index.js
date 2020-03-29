@@ -7,6 +7,7 @@ import Home from 'pages/Home'
 import Layout from 'pages/layout'
 import Detail from 'pages/Detail'
 import Notice from 'pages/Notice'
+import Profile from 'pages/Profile'
 import Store from 'pages/store'
 import { message } from 'antd';
 import 'antd/dist/antd.css'
@@ -51,6 +52,13 @@ const pages = [
     key: 'notice',
     path: '/:userId/notice',
     component: Notice,
+    isLoginPage: false,
+  },
+  {
+    name: '个人主页',
+    key: 'profile',
+    path: '/:userId/profile',
+    component: Profile,
     isLoginPage: false,
   },
 ]

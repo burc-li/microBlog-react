@@ -11,7 +11,9 @@ import './index.less'
 const { Panel } = Collapse;
 
 
-@inject(() => {
+@inject((stores) => {
+  const { profileStore } = stores
+  const { getFans: getFans_profile } = profileStore
   const {
     fansData,
     followersData,
@@ -20,7 +22,7 @@ const { Panel } = Collapse;
     getFollowers,
     getProfileBlog,
     follow,
-    unFollow
+    unFollow,
   } = store
   return {
     fansData: toJS(fansData),
@@ -30,16 +32,16 @@ const { Panel } = Collapse;
     getFollowers,
     getProfileBlog,
     follow,
-    unFollow
+    unFollow,
+    getFans_profile
   }
 })
 @observer
 class Left extends Component {
+
   componentDidMount() {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'))
-    // const userId = this.props.match.params.userId
     const userId = userInfo ? userInfo.id : 0
-    // console.log("userInfo", userInfo)
     this.props.getFans(userId)
     this.props.getFollowers(userId)
     this.props.getProfileBlog(userId, 0)
@@ -51,14 +53,20 @@ class Left extends Component {
       followersData,
       profileBlogCount,
       follow,
-      unFollow
+      unFollow,
+      getFans_profile
     } = this.props
-    // const userId = this.props.match.params.userId
-    const followersList = followersData.followersList ? followersData.followersList : []
-    const fansList = fansData.fansList ? fansData.fansList : []
+
+    const followersList = followersData.followersList ?
+      followersData.followersList : []
+    const fansList = fansData.fansList ?
+      fansData.fansList : []
     const userInfo = JSON.parse(localStorage.getItem('userInfo'))
     const userId = userInfo ? userInfo.id : 0
-    // console.log("userInfo", userInfo)
+
+    const profileId = this.props.match.params.userId
+    console.log("profileId", profileId)
+
     return (
       <div className="left-sider">
         <UserInfo
@@ -75,8 +83,10 @@ class Left extends Component {
                     key={item.id}
                     userId={userId}
                     type="follower"
+                    profileId={profileId}
                     userItem={item.user}
                     onClickUnfollow={unFollow}
+                    callback={getFans_profile}
                   />) : null
             }
           </Panel>
@@ -95,9 +105,11 @@ class Left extends Component {
                       key={item.id}
                       isFollower={isFollower}
                       userId={userId}
+                      profileId={profileId}
                       type="fans"
                       userItem={item}
                       onClickFollow={follow}
+                      callback={getFans_profile}
                     />
                   )
                 }) : null

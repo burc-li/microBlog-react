@@ -11,20 +11,28 @@ function DisabledBtn() {
 }
 
 function FollowBtn(props) {
-  const { userId, followerId } = props
+  const { userId, followerId, profileId } = props
   return <Button
     className="item-btn"
-    onClick={() => { props.onClickFollow(userId, followerId) }}
+    onClick={() => {
+      props.onClickFollow(userId, followerId).then(() => {
+        props.callback(profileId)
+      })
+    }}
   >
     关注
 </Button>
 }
 
 function UnfollowBtn(props) {
-  const { userId, followerId } = props
+  const { userId, followerId, profileId } = props
   return <Button
     className="item-btn"
-    onClick={() => { props.onClickUnfollow(userId, followerId) }}
+    onClick={() => {
+      props.onClickUnfollow(userId, followerId).then(() => {
+        props.callback(profileId)
+      })
+    }}
   >
     取消关注
 </Button>
@@ -33,7 +41,7 @@ function UnfollowBtn(props) {
 
 export default function UserItem(props) {
 
-  const { type, userId, userItem } = props
+  const { type, userId, profileId, userItem } = props
   const userInfo = JSON.parse(localStorage.getItem('userInfo'))
   if (userInfo) {
     return (
@@ -57,12 +65,16 @@ export default function UserItem(props) {
               <DisabledBtn /> :
               <FollowBtn
                 onClickFollow={props.onClickFollow}
+                callback={props.callback}
                 userId={userId}
+                profileId={profileId}
                 followerId={userItem.id}
               /> :
             <UnfollowBtn
               onClickUnfollow={props.onClickUnfollow}
+              callback={props.callback}
               userId={userId}
+              profileId={profileId}
               followerId={userItem.id}
             />
         }

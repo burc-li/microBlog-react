@@ -22,7 +22,6 @@ class Store {
       const res = await getFansData(userId)
       if (res.data.success) {
         this.fansData = res.data.data
-        console.log("this.fansData ", res.data.data)
       }
     } catch{
       message.error('获取粉丝数据失败，请刷新');
@@ -61,7 +60,7 @@ class Store {
     try {
       const res = await follow(followerId)
       if (res.data.success) {
-        await this.getFans(userId)
+        await this.getFans(followerId)
         message.success('关注成功');
       }
     } catch{
@@ -78,9 +77,8 @@ class Store {
     // console.log(userId, followerId)
     try {
       const res = await unFollow(followerId)
-      console.log("res", res)
       if (res.data.success) {
-        await this.getFans(userId)
+        await this.getFans(followerId)
         message.success('取消关注成功');
       }
     } catch{

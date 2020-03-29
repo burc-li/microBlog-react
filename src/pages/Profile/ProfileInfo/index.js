@@ -8,7 +8,9 @@ import store from '../store'
 import { Button } from 'antd';
 import './index.less'
 
-@inject(() => {
+@inject((stores) => {
+  const { leftStore } = stores
+  const { getFans, getFollowers } = leftStore
   const {
     fansData,
     followersCount,
@@ -20,7 +22,9 @@ import './index.less'
     followersCount,
     profileBlog: toJS(profileBlog),
     follow,
-    unFollow
+    unFollow,
+    getFans,
+    getFollowers
   }
 })
 @observer
@@ -29,14 +33,19 @@ class ProfileInfo extends Component {
   onUnfollow = () => {
     const { userInfoStorage,
       userIdUrl: followerId, } = this.props
-    console.log("followerId", followerId)
-    this.props.unFollow(userInfoStorage.id, followerId)
+    this.props.unFollow(userInfoStorage.id, followerId).then(() => {
+      this.props.getFans(userInfoStorage.id)
+      this.props.getFollowers(userInfoStorage.id)
+    })
   }
 
   onfollow = () => {
     const { userInfoStorage,
       userIdUrl: followerId, } = this.props
-    this.props.follow(userInfoStorage.id, followerId)
+    this.props.follow(userInfoStorage.id, followerId).then(() => {
+      this.props.getFans(userInfoStorage.id)
+      this.props.getFollowers(userInfoStorage.id)
+    })
   }
 
   render() {
@@ -60,9 +69,10 @@ class ProfileInfo extends Component {
     const isFollower = fansData.fansList.some(item =>
       item.id == userInfoStorage.id)
 
-    console.log("isSelf", isSelf)
-    console.log("isFollower", isFollower)
-    console.log("fansData", fansData)
+    // console.log("isSelf", isSelf)
+    // console.log("isFollower", isFollower)
+    // console.log("fansData", fansData)
+
     return (
       <div className="profile-info">
         <img src={`${DOMAIN}${pic}`} alt='' />

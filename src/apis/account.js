@@ -31,3 +31,10 @@ export const login = account => {
 export const logout = () => {
   return axios.post(`/api/user/logout`);
 }
+
+/**
+ * 退出
+ */
+export const changePassword = (password, newPassword) => {
+  return axios.patch(`/api/user/changePassword`, { password, newPassword });
+}

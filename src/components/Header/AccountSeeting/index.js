@@ -51,14 +51,12 @@ class AccountSeeting extends Component {
 
   render() {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+
     const { noticeMess } = this.props
     const menu = (
       <Menu>
         <Menu.Item key="0">
-          <a href="http://www.alipay.com/">1st menu item</a>
-        </Menu.Item>
-        <Menu.Item key="1">
-          <a href="http://www.taobao.com/">2nd menu item</a>
+          <Link to={`/${userInfo.id}/update`}>修改中心</Link>
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item key="3" onClick={this.onClickOut}>退出</Menu.Item>

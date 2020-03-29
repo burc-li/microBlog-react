@@ -4,6 +4,7 @@ import { observer, inject } from 'mobx-react'
 import { toJS } from 'mobx'
 import store from './store'
 import ProfileInfo from './ProfileInfo'
+import ProfileBlog from './ProfileBlog'
 import './index.less'
 
 
@@ -11,11 +12,13 @@ import './index.less'
   const {
     getFans,
     getFollowers,
-    getProfileBlog } = store
+    getProfileBlog,
+    profileBlog } = store
   return {
     getFans,
     getFollowers,
     getProfileBlog,
+    profileBlog: toJS(profileBlog)
   }
 })
 @observer
@@ -42,12 +45,20 @@ class Profile extends Component {
   render() {
 
     const { userInfoStorage, userIdUrl } = this.state
+    const { profileBlog, getProfileBlog } = this.props
+
 
     return (
       <div className="profile-wrap">
         <ProfileInfo
           userInfoStorage={userInfoStorage}
           userIdUrl={userIdUrl}
+        />
+        <ProfileBlog
+          userInfoStorage={userInfoStorage}
+          profileBlog={profileBlog}
+          userIdUrl={userIdUrl}
+          getProfileBlog={getProfileBlog}
         />
       </div>
     )

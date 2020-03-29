@@ -14,7 +14,10 @@ class Store {
   @observable
   followersCount = 0
   @observable
-  profileBlog = { count: 0 }
+  profileBlog = {
+    pageSize: 0,
+    count: 0
+  }
 
   @action.bound
   async getFans(userId) {

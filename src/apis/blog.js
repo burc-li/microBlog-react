@@ -29,3 +29,7 @@ export const getFollowerBolgData = (userId, pageIndex) => {
 export const getBlogDetail = blogId => {
   return axios.get(`/api/blog/detail?blogId=${blogId}`)
 }
+// 通过个人主页的微博列表
+export const getProfileBlog = (userId, pageIndex) => {
+  return axios.get(`/api/blog/profile/list?userId=${userId}&pageIndex=${pageIndex}`)
+}

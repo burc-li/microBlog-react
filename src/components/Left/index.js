@@ -65,7 +65,7 @@ class Left extends Component {
     const userId = userInfo ? userInfo.id : 0
 
     const profileId = this.props.match.params.userId
-    console.log("profileId", profileId)
+    // console.log("profileId", profileId)
 
     return (
       <div className="left-sider">

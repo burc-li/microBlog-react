@@ -69,9 +69,6 @@ class ProfileInfo extends Component {
     const isFollower = fansData.fansList.some(item =>
       item.id == userInfoStorage.id)
 
-    // console.log("isSelf", isSelf)
-    // console.log("isFollower", isFollower)
-    // console.log("fansData", fansData)
 
     return (
       <div className="profile-info">

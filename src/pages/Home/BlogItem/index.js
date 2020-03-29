@@ -45,7 +45,7 @@ class BlogItem extends Component {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'))
     const { blogData, currentPage } = this.props
     const { user } = blogData
-    // console.log("userInfo.id", userInfo.id)
+    // console.log("userInfo", userInfo)
     // console.log("blogData", blogData)
     // console.log("currentPage", currentPage)
     return (
@@ -67,9 +67,13 @@ class BlogItem extends Component {
               <Menu.Item onClick={() => { this.complain(blogData.id) }}>
                 举报
             </Menu.Item>
-              <Menu.Item onClick={() => { this.delete(blogData.id) }}>
-                {userInfo ? userInfo.id === 0 || userInfo.id === blogData.userId ? `删除` : '' : ''}
+              {
+                userInfo.id === 0 || userInfo.id === blogData.userId ?
+                  <Menu.Item onClick={() => { this.delete(blogData.id) }}>
+                    删除
               </Menu.Item>
+                  : null
+              }
             </Menu>}
             trigger={['click']}
           >

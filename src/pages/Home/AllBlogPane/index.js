@@ -27,7 +27,7 @@ class AllBlogPane extends Component {
   render() {
     const { allBlogData } = this.props
     const { blogList, pageSize, pageIndex, count } = allBlogData
-    console.log("count", count)
+    // console.log("count", count)
     const PaginationOption = {
       current: Number(pageIndex) + 1,
       pageSize: pageSize,

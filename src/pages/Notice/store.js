@@ -1,10 +1,15 @@
 import { observable, action } from 'mobx'
-import { getNoticeData, readNotice } from 'apis/message'
+import { getNoticeData, getReadedNoticeData, readNotice } from 'apis/message'
 import { message } from 'antd'
 
 class Store {
   @observable
   noticeMess = {
+    messageList: [],
+    count: 0
+  }
+  @observable
+  readedNoticeMess = {
     messageList: [],
     count: 0
   }
@@ -18,6 +23,18 @@ class Store {
       }
     } catch{
       message.error('获取消息通知失败');
+    }
+  }
+
+  @action.bound
+  async getReadedNoticeData(userId) {
+    try {
+      const res = await getReadedNoticeData(userId)
+      if (res.data.success) {
+        this.readedNoticeMess = res.data.data
+      }
+    } catch{
+      message.error('获取已经读取的消息失败');
     }
   }
 

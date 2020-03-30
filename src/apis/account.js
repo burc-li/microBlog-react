@@ -33,8 +33,20 @@ export const logout = () => {
 }
 
 /**
- * 退出
+ * 修改密码
  */
 export const changePassword = (password, newPassword) => {
   return axios.patch(`/api/user/changePassword`, { password, newPassword });
+}
+/**
+ * 修改简介
+ */
+export const changeBriefIntroduce = briefIntroduce => {
+  return axios.patch(`/api/user/changeInfo`, { briefIntroduce });
+}
+/**
+ * 修改头像
+ */
+export const changePic = picture => {
+  return axios.patch(`/api/user/changeInfo`, { picture });
 }
